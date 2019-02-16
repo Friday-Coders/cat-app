@@ -1,21 +1,24 @@
 <template>
   <div class="home">
     <h1 class="f1">Home</h1>
-    <div v-for="cat in cats" :key="cat.id">
-      <img :src="cat.url">
-    </div>
+    <Grid :cats="cats"/>
     <button @click="getRandomCat">CAT!</button>
   </div>
 </template>
 
 <script>
 import CatApiService from "../services/CatApiService.js";
+import Grid from "@/components/Grid.vue";
 
 export default {
   name: "home",
+  components: {
+    Grid
+  },
   data: function() {
     return {
       cats: [],
+      fact: "No fact",
       page: 0
     };
   },
