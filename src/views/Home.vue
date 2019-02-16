@@ -1,18 +1,36 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <h1 class="f1">Home</h1>
+    <div v-for="cat in cats" :key="cat.id">
+      <img :src="cat.url">
+    </div>
+    <button @click="getRandomCat">CAT!</button>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue';
+import CatApiService from "../services/CatApiService.js";
 
 export default {
-  name: 'home',
-  components: {
-    HelloWorld,
+  name: "home",
+  data: function() {
+    return {
+      cats: [],
+      page: 0
+    };
   },
+  created: async function() {
+    this.getRandomCat();
+  },
+  methods: {
+    getRandomCat: async function() {
+      const returnedCats = await CatApiService.searchForCats({
+        limit: 5,
+        page: this.page++,
+        order: "RANDOM"
+      });
+      this.cats = [...this.cats, ...returnedCats];
+    }
+  }
 };
 </script>
