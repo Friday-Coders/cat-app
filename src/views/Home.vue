@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <h1 class="f1">Home</h1>
-    <Grid :cats="cats"/>
+    <Grid :cats="cats" @loadMore="getRandomCat"/>
     <button @click="getRandomCat">CAT!</button>
   </div>
 </template>
@@ -37,3 +37,8 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.home {
+}
+</style>
