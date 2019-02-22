@@ -13,7 +13,7 @@ export default new Router({
       component: () => import("./views/Home.vue")
     },
     {
-      path: "/cat",
+      path: "/cat/:catId",
       name: "Cat Details",
       component: () => import("./views/Cat-Details.vue")
     },
