@@ -2,36 +2,39 @@
   <div class="filter">
     <v-select
       placeholder="Order"
-      v-model="order"
+      v-bind:value="filters.order"
       :options="orderOptions"
+      @input="value => this.$emit('onChange', { order: value })"
     ></v-select>
     <v-select
       placeholder="Type"
-      v-model="type"
+      v-bind:value="filters.mime_types"
       :options="typeOptions"
+      @input="value => this.$emit('onChange', { mime_types: value })"
     ></v-select>
     <v-select
       placeholder="Category"
-      v-model="category"
+      v-bind:value="filters.category_ids"
       :options="categoryOptions"
+      @input="value => this.$emit('onChange', { category_ids: value })"
     ></v-select>
     <v-select
       placeholder="Breed"
-      v-model="breed"
+      v-bind:value="filters.breed_id"
       :options="breedOptions"
+      @input="value => this.$emit('onChange', { breed_id: value })"
     ></v-select>
   </div>
 </template>
 
 <script>
+import CatApiService from "../services/CatApiService.js";
+
 export default {
   name: "cat-filter",
+  props: ["filters"],
   data: function() {
     return {
-      order: null,
-      type: null,
-      category: null,
-      breed: null,
       orderOptions: ["Rand", "Desc", "Asc"],
       typeOptions: [
         { label: "Static", value: "jpg,png" },
@@ -47,10 +50,24 @@ export default {
     if (!this.breedOptions.length) this.getBreeds();
   },
   methods: {
-    getCategories: function() {
-      console.log("fetched cat categories");
+    getCategories: async function() {
+      const response = await CatApiService.listCategories();
+      const catigories = response.map(catigory => ({
+        label: catigory.name,
+        value: catigory.id
+      }));
+      localStorage.setItem("categoryOptions", JSON.stringify(catigories));
+      this.categoryOptions = catigories;
+      console.log("fetched cat categories", response);
     },
-    getBreeds: function() {
+    getBreeds: async function() {
+      const response = await CatApiService.listBreeds();
+      const breeds = response.map(breed => ({
+        label: breed.name,
+        value: breed.id
+      }));
+      localStorage.setItem("breedOptions", JSON.stringify(breeds));
+      this.breedOptions = breeds;
       console.log("fetched cat breeds");
     }
   }
