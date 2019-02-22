@@ -13,6 +13,11 @@ export default new Router({
       component: () => import("./views/Home.vue")
     },
     {
+      path: "/mycats",
+      name: "My Cats",
+      component: () => import("./views/MyCats.vue")
+    },
+    {
       path: "/cat/:catId",
       name: "Cat Details",
       component: () => import("./views/Cat-Details.vue")
