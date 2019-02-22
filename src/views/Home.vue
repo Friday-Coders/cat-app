@@ -1,19 +1,20 @@
 <template>
   <div class="home">
-    <h1 class="f1">Home</h1>
-    <Grid :cats="cats" @loadMore="getRandomCat" />
-    <!-- <button @click="getRandomCat">CAT!</button> -->
+    <cat-filter/>
+    <Grid :cats="cats" @loadMore="getRandomCat"/>
   </div>
 </template>
 
 <script>
 import CatApiService from "../services/CatApiService.js";
 import Grid from "@/components/Grid.vue";
+import CatFilter from "@/components/CatFilter.vue";
 
 export default {
   name: "home",
   components: {
-    Grid
+    Grid,
+    CatFilter
   },
   data: function() {
     return {
