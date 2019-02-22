@@ -45,7 +45,7 @@ export default {
 <style lang="scss" scoped>
 .filter {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+  grid-template-columns: 1fr 1fr;
   grid-gap: 5px;
 }
 </style>
