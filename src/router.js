@@ -13,9 +13,14 @@ export default new Router({
       component: () => import("./views/Home.vue")
     },
     {
-      path: "/about",
-      name: "about",
-      component: () => import("./views/About.vue")
+      path: "/cat/:catId",
+      name: "Cat Details",
+      component: () => import("./views/Cat-Details.vue")
+    },
+    {
+      path: "/upload",
+      name: "Upload Cat Image",
+      component: () => import("./views/Upload.vue")
     }
   ]
 });

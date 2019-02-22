@@ -1,7 +1,9 @@
 <template>
-  <div>
-    <img :src="cat.url" />
-  </div>
+  <router-link :to="{ name: 'Cat Details', params: { catId: cat.id } }">
+    <div class="card">
+      <img :src="cat.url" />
+    </div>
+  </router-link>
 </template>
 
 <script>
@@ -13,4 +15,16 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.card {
+  height: 100%;
+  width: 100%;
+
+  img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+}
+</style>
