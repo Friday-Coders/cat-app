@@ -1,6 +1,6 @@
 <template>
   <div>
-    <img :src="cat.url">
+    <img :src="cat.url" />
   </div>
 </template>
 
@@ -13,5 +13,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

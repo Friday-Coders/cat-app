@@ -1,7 +1,10 @@
 <template>
   <div class="grid" ref="grid">
-    <Card v-for="cat in cats" :cat="cat" :key="cat.id"/>
-    <vue-mugen-scroll :handler="scroll" scroll-container="grid"></vue-mugen-scroll>
+    <Card v-for="cat in cats" :cat="cat" :key="cat.id" />
+    <vue-mugen-scroll
+      :handler="scroll"
+      scroll-container="grid"
+    ></vue-mugen-scroll>
   </div>
 </template>
 
@@ -31,4 +34,3 @@ export default {
   overflow: auto;
 }
 </style>
-
