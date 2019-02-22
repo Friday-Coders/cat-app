@@ -1,7 +1,7 @@
 <template>
   <div class="home">
-    <cat-filter/>
-    <Grid :cats="cats" @loadMore="getRandomCat"/>
+    <cat-filter />
+    <Grid :cats="cats" @loadMore="getRandomCat" />
   </div>
 </template>
 

@@ -1,12 +1,27 @@
 <template>
   <div class="filter">
-    <v-select placeholder="Order" v-model="order" :options="orderOptions"></v-select>
-    <v-select placeholder="Type" v-model="type" :options="typeOptions"></v-select>
-    <v-select placeholder="Category" v-model="category" :options="categoryOptions"></v-select>
-    <v-select placeholder="Breed" v-model="breed" :options="breedOptions"></v-select>
+    <v-select
+      placeholder="Order"
+      v-model="order"
+      :options="orderOptions"
+    ></v-select>
+    <v-select
+      placeholder="Type"
+      v-model="type"
+      :options="typeOptions"
+    ></v-select>
+    <v-select
+      placeholder="Category"
+      v-model="category"
+      :options="categoryOptions"
+    ></v-select>
+    <v-select
+      placeholder="Breed"
+      v-model="breed"
+      :options="breedOptions"
+    ></v-select>
   </div>
 </template>
-
 
 <script>
 export default {

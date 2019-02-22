@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>Loading</div>
-    <p>{{fact}}</p>
+    <p>{{ fact }}</p>
   </div>
 </template>
 
