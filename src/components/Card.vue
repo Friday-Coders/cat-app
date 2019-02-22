@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="card">
     <img :src="cat.url">
   </div>
 </template>
@@ -14,4 +14,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.card {
+  img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+}
 </style>
