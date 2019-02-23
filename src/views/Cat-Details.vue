@@ -1,12 +1,8 @@
 <template>
   <div class="cat-details">
     <div class="cat-container">
-      <canvas
-        ref="canvas"
-        class="canvas"
-        :class="{ show: !isAnimated }"
-      ></canvas>
-      <img ref="catPhoto" class="cat-photo" :src="image" />
+      <canvas ref="canvas" class="canvas" v-show="!isAnimated"></canvas>
+      <img ref="catPhoto" class="cat-photo" v-show="isAnimated" :src="image" />
     </div>
     <div class="btns">
       <button class="dream btn" @click="deepDream">Deep Dream ✨</button>
@@ -177,17 +173,5 @@ export default {
   object-fit: contain;
   margin: 0 auto;
   border-radius: 5px;
-}
-
-.canvas {
-  position: absolute;
-  left: 50%;
-  top: 0;
-  transform: translateX(-50%);
-  visibility: hidden;
-
-  &.show {
-    visibility: visible;
-  }
 }
 </style>
