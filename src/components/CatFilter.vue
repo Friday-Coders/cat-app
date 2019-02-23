@@ -2,27 +2,27 @@
   <div class="filter">
     <v-select
       placeholder="Order"
-      v-bind:value="filters.order"
+      :value="filters.order"
       :options="orderOptions"
-      @input="value => this.$emit('onChange', { order: value })"
+      @input="value => this.$emit('update:filterOptions', { order: value })"
     ></v-select>
     <v-select
       placeholder="Type"
-      v-bind:value="filters.mime_types"
+      :value="filters.mime_types"
       :options="typeOptions"
-      @input="value => this.$emit('onChange', { mime_types: value })"
+      @input="value => this.$emit('update:filterOptions', { mime_types: value })"
     ></v-select>
     <v-select
       placeholder="Category"
-      v-bind:value="filters.category_ids"
+      :value="filters.category_ids"
       :options="categoryOptions"
-      @input="value => this.$emit('onChange', { category_ids: value })"
+      @input="value => this.$emit('update:filterOptions', { category_ids: value })"
     ></v-select>
     <v-select
       placeholder="Breed"
-      v-bind:value="filters.breed_id"
+      :value="filters.breed_id"
       :options="breedOptions"
-      @input="value => this.$emit('onChange', { breed_id: value })"
+      @input="value => this.$emit('update:filterOptions', { breed_id: value })"
     ></v-select>
   </div>
 </template>

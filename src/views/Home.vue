@@ -1,7 +1,7 @@
 <template>
   <div class="home">
-    <cat-filter :filters="filters" @onChange="updateFilters" />
-    <Grid :cats="cats" @loadMore="getCats" />
+    <cat-filter :filters="filters" @update:filterOptions="updateFilters"/>
+    <Grid :cats="cats" @loadMore="getCats"/>
   </div>
 </template>
 
