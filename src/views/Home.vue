@@ -1,7 +1,7 @@
 <template>
   <div class="home">
-    <cat-filter />
-    <Grid :cats="cats" @loadMore="getRandomCat" />
+    <cat-filter :filters="filters" @onChange="updateFilters" />
+    <Grid :cats="cats" @loadMore="getCats" />
   </div>
 </template>
 
@@ -20,20 +20,38 @@ export default {
     return {
       cats: [],
       fact: "No fact",
-      page: 0
+      filters: {
+        limit: 20,
+        page: 0,
+        order: "Rand"
+      }
     };
   },
   created: async function() {
-    this.getRandomCat();
+    this.getCats();
   },
   methods: {
-    getRandomCat: async function() {
+    getCats: async function() {
       const returnedCats = await CatApiService.searchForCats({
-        limit: 5,
-        page: this.page++,
-        order: "RANDOM"
+        ...this.filters,
+        page: this.page++
       });
       this.cats = [...this.cats, ...returnedCats];
+    },
+    updateFilters: function(newFilters) {
+      Object.keys(newFilters).forEach(
+        key =>
+          (this.filters[key] =
+            newFilters[key] && newFilters[key].value
+              ? newFilters[key].value
+              : newFilters[key])
+      );
+      Object.keys(newFilters).forEach(
+        key => this.filters[key] == null && delete this.filters[key]
+      );
+      this.cats = [];
+      this.page = 0;
+      this.getCats();
     }
   }
 };
