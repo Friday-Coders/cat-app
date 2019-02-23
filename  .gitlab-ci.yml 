@@ -1,0 +1,41 @@
+image: node:11.4
+
+
+stages:
+  - test
+  - build
+  - deploy
+
+cache:
+  paths:
+    - node_modules/
+
+# test:
+#   stage: test
+#   script:
+#    - echo $AWS_ACCESS_KEY_ID
+
+
+build:
+  stage: build
+  only:
+    - master
+  script:
+    - NODE_ENV=development npm install
+    - CI=false npm run build
+  artifacts:
+    paths:
+      - dist
+
+
+pages:
+  stage: deploy
+  only:
+    - master
+  script:
+    - rm -rf public
+    - mv dist public
+  artifacts:
+    paths:
+    - public
+
