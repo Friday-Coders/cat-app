@@ -2,7 +2,12 @@
   <div class="cat-details">
     <div class="cat-container">
       <canvas ref="canvas" class="canvas" v-show="!isAnimated"></canvas>
-      <img ref="catPhoto" class="cat-photo" v-show="isAnimated" :src="image" />
+      <img
+        ref="catPhoto"
+        class="cat-photo"
+        @load="drawImageOnCanvas"
+        :src="image"
+      />
     </div>
     <div class="btns">
       <button class="dream btn" @click="deepDream">Deep Dream ✨</button>
@@ -34,17 +39,19 @@ export default {
       isAnimated: false,
       isMemefied: false,
       isCoolified: false,
-      context: null
+      context: null,
+      imageUrl: null,
+      originalImage: null
     };
+  },
+  watch: {
+    imageUrl: function(newUrl) {
+      this.loadImgAsBase64(newUrl);
+    }
   },
   computed: {
     disableCool: function() {
       return this.isAnimated || !this.image;
-    }
-  },
-  watch: {
-    image: function(value) {
-      this.drawImageOnCanvas(value);
     }
   },
   created: function() {
@@ -59,7 +66,8 @@ export default {
     getCatDetails: async function() {
       this.$emit("loading:on");
       const returnedCat = await CatApiService.getImage(this.id);
-      this.image = returnedCat.url;
+      this.imageUrl = returnedCat.url;
+      this.originalImage = returnedCat.url;
       const extension = returnedCat.url.split(".").pop();
       this.isAnimated = extension === "gif";
       this.$emit("loading:off");
@@ -71,12 +79,13 @@ export default {
     },
     deepDream: async function() {
       this.$emit("loading:on");
-      const response = await DeepAIService.deepDream(this.image);
-      this.image = response.output_url;
+      const response = await DeepAIService.deepDream(this.originalImage);
+      this.imageUrl = response.output_url;
       this.$emit("loading:off");
     },
     coolifyCat: function() {
-      const catFaces = kittydar.detectCats(this.$refs.canvas);
+      this.$refs.catPhoto.crossOrigin = "Anonymous";
+      const catFaces = kittydar.detectCats(this.$refs.catPhoto);
       if (!catFaces.length) {
         this.$toasted.show("Sorry, this cat ain't cool enough", {
           position: "bottom-right",
@@ -90,7 +99,6 @@ export default {
         catFaces.forEach(({ x, y, height, width }) => {
           const vm = this;
           const sunGlassesImg = new Image();
-          sunGlassesImg.crossOrigin = "Anonymous";
           sunGlassesImg.onload = function() {
             vm.context.drawImage(sunGlassesImg, x, y, height, width);
           };
@@ -109,39 +117,42 @@ export default {
       const vm = this;
       this.$emit("loading:on");
       const response = MemeGeneratorService.generateMemeFromImageUrl(
-        this.image,
+        this.imageUrl,
         "meow memeow?",
         "meowy meow moew",
         this.$refs.catPhoto.width,
         this.$refs.catPhoto.height
       );
-      this.image = response;
-      const img = new Image();
-      img.onload = function() {
+      this.imageUrl = response;
+      this.$refs.catPhoto.onload = function() {
         vm.$emit("loading:off");
       };
-      img.src = response;
     },
-    drawImageOnCanvas: function(imgSrc) {
+    drawImageOnCanvas: function() {
       const vm = this;
-      var img = new Image();
-      img.crossOrigin = "Anonymous";
-      img.onload = function() {
-        vm.$refs.canvas.height = vm.$refs.catPhoto.height;
-        vm.$refs.canvas.width = vm.$refs.catPhoto.width;
-        vm.context.drawImage(
-          img,
-          0,
-          0,
-          img.width,
-          img.height,
-          0,
-          0,
-          vm.$refs.canvas.width,
-          vm.$refs.canvas.height
-        );
+      vm.$refs.canvas.height = vm.$refs.catPhoto.height;
+      vm.$refs.canvas.width = vm.$refs.catPhoto.width;
+      vm.context.clearRect(
+        0,
+        0,
+        vm.$refs.catPhoto.width,
+        vm.$refs.catPhoto.height
+      );
+    },
+    loadImgAsBase64: function(url) {
+      let canvas = document.createElement("CANVAS");
+      let img = new Image();
+      img.setAttribute("crossorigin", "anonymous");
+      img.src = "https://cors-anywhere.herokuapp.com/" + url;
+
+      img.onload = () => {
+        canvas.height = img.height;
+        canvas.width = img.width;
+        let context = canvas.getContext("2d");
+        context.drawImage(img, 0, 0);
+        let dataURL = canvas.toDataURL("image/png");
+        this.image = dataURL;
       };
-      img.src = imgSrc;
     }
   }
 };
@@ -162,8 +173,9 @@ export default {
 }
 
 .cat-container {
-  text-align: center;
+  // text-align: center;
   position: relative;
+  margin: 0 auto;
 }
 
 .cat-photo,
@@ -173,5 +185,11 @@ export default {
   object-fit: contain;
   margin: 0 auto;
   border-radius: 5px;
+}
+
+.canvas {
+  position: absolute;
+  left: 0;
+  top: 0;
 }
 </style>

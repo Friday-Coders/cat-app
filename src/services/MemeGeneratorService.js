@@ -1,6 +1,6 @@
 import { jsonToQueryString } from "../helpers/index.js";
 
-const API_URL = " https://memegen.link/";
+const API_URL = "https://memegen.link/";
 
 const escapeMemeLine = line => {
   return line

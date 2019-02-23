@@ -1,10 +1,10 @@
-const API_URL = " https://cat-fact.herokuapp.com/";
+const proxyurl = "https://cors-anywhere.herokuapp.com/";
+const API_URL = "https://cat-fact.herokuapp.com/";
 
 export default class CatFactsSerivece {
   static async fetchFromApi(method, endpoint) {
-    const response = await fetch(`${API_URL}${endpoint}`, {
-      method,
-      mode: "no-cors"
+    const response = await fetch(`${proxyurl}${API_URL}${endpoint}`, {
+      method
     });
     return response.json();
   }
