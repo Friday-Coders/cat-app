@@ -3,7 +3,8 @@ const API_URL = " https://cat-fact.herokuapp.com/";
 export default class CatFactsSerivece {
   static async fetchFromApi(method, endpoint) {
     const response = await fetch(`${API_URL}${endpoint}`, {
-      method
+      method,
+      mode: "no-cors"
     });
     return response.json();
   }
