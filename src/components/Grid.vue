@@ -27,12 +27,13 @@ export default {
 
 <style lang="scss" scoped>
 .grid {
-  height: calc(100vh - 188px);
+  height: calc(100vh - 268px);
   overflow: auto;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   grid-auto-rows: 250px;
-  grid-gap: 15px;
+  grid-gap: 10px;
+  padding-top: 10px;
 }
 
 .card {
