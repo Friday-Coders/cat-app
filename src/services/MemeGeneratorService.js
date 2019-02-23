@@ -33,11 +33,11 @@ export default class MemeGeneratorService {
     return `${API_URL}${template}/${line1Safe}.jpg/${line2Safe}`;
   }
 
-  static generateMemeFromImageUrl(imageUrl, line1, line2) {
+  static generateMemeFromImageUrl(imageUrl, line1, line2, width, height) {
     const line1Safe = escapeMemeLine(line1);
     const line2Safe = escapeMemeLine(line2);
 
-    const params = jsonToQueryString({ alt: imageUrl });
+    const params = jsonToQueryString({ alt: imageUrl, width, height });
     return `${API_URL}custom/${line1Safe}/${line2Safe}.jpg?${params}`;
   }
 
