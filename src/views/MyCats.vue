@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <Grid :cats="cats" />
+    <Grid :cats="cats"/>
   </div>
 </template>
 
@@ -25,8 +25,10 @@ export default {
   },
   methods: {
     getMyCat: async function() {
+      this.$emit("loading:on");
       const returnedCats = await CatApiService.getMyImages();
       this.cats = returnedCats;
+      this.$emit("loading:off");
     }
   }
 };

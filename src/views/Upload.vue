@@ -1,7 +1,7 @@
 <template>
   <div>
-    <input type="file" name="cat-photo" @change="addPhoto" />
-    <img :src="catPhoto" />
+    <input type="file" name="cat-photo" @change="addPhoto">
+    <img :src="catPhoto">
     <button @click="uploadPhoto">Upload</button>
     <button @click="removePhoto">Remove</button>
   </div>
@@ -35,7 +35,9 @@ export default {
       reader.readAsDataURL(files[0]);
     },
     uploadPhoto: async function() {
+      this.$emit("loading:on");
       const response = await CatApiService.uploadImage(this.catFile);
+      this.$emit("loading:off");
       console.log("uploaded photo", response);
     },
     removePhoto: function() {

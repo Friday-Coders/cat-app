@@ -28,7 +28,9 @@ export default {
     };
   },
   created: async function() {
-    this.getCats();
+    this.$emit("loading:on");
+    await this.getCats();
+    this.$emit("loading:off");
   },
   methods: {
     getCats: async function() {
@@ -38,7 +40,8 @@ export default {
       });
       this.cats = [...this.cats, ...returnedCats];
     },
-    updateFilters: function(newFilters) {
+    updateFilters: async function(newFilters) {
+      this.$emit("loading:on");
       Object.keys(newFilters).forEach(
         key =>
           (this.filters[key] =
@@ -51,7 +54,8 @@ export default {
       );
       this.cats = [];
       this.page = 0;
-      this.getCats();
+      await this.getCats();
+      this.$emit("loading:off");
     }
   }
 };
