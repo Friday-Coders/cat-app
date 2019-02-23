@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="wrapper">
     <top-nav/>
     <router-view @loading:on="turnOnLoading" @loading:off="turnOffLoading"/>
     <Loading v-show="isLoading" :isLoading="isLoading"/>
@@ -39,9 +39,7 @@ export default {
 <style lang="scss">
 @import "normalize-scss";
 @import "tachyons";
+@import "./styles/variables.scss";
+@import "./styles/global.scss";
 @include normalize();
-
-::-webkit-scrollbar {
-  display: none;
-}
 </style>
