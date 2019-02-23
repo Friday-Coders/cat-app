@@ -30,7 +30,9 @@ export default {
     },
     turnOffLoading: function() {
       if (this.loadingTimeOut) clearTimeout(this.loadingTimeOut);
-      this.isLoading = false;
+      this.loadingTimeOut = setTimeout(() => {
+        this.isLoading = false;
+      }, 500);
     }
   }
 };
