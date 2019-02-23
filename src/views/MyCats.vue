@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <Grid :cats="cats"/>
+    <Grid :cats="cats" @loadMore="getMyCat" />
   </div>
 </template>
 
@@ -26,8 +26,12 @@ export default {
   methods: {
     getMyCat: async function() {
       this.$emit("loading:on");
-      const returnedCats = await CatApiService.getMyImages();
-      this.cats = returnedCats;
+      const returnedCats = await CatApiService.getMyImages({
+        page: this.page++,
+        limit: 20,
+        order: "DESC"
+      });
+      this.cats = [...this.cats, ...returnedCats];
       this.$emit("loading:off");
     }
   }
