@@ -12,7 +12,9 @@ export default class CatApiService {
         "x-api-key": API_KEY
       })
     });
-    return response.json();
+
+    const body = await response.text();
+    return body ? JSON.parse(body) : {};
   }
 
   static async get(endpoint, data) {
@@ -57,7 +59,7 @@ export default class CatApiService {
     return await this.get(`images/${id}`);
   }
 
-  static async searchForCats(params = { limit: 5, page: 0, order: "RANDOM" }) {
+  static async searchForCats(params) {
     return await this.get("images/search", params);
   }
 

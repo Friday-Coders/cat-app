@@ -26,19 +26,19 @@ export default class MemeGeneratorService {
     return await this.fetchFromApi("GET", endpoint);
   }
 
-  static async generateMemeFromTemplate(template, line1, line2) {
+  static generateMemeFromTemplate(template, line1, line2) {
     const line1Safe = escapeMemeLine(line1);
     const line2Safe = escapeMemeLine(line2);
 
-    return await this.get(`${template}/${line1Safe}/${line2Safe}`);
+    return `${API_URL}${template}/${line1Safe}.jpg/${line2Safe}`;
   }
 
-  static async generateMemeFromImageUrl(imageUrl, line1, line2) {
+  static generateMemeFromImageUrl(imageUrl, line1, line2) {
     const line1Safe = escapeMemeLine(line1);
     const line2Safe = escapeMemeLine(line2);
 
     const params = jsonToQueryString({ alt: imageUrl });
-    return await this.get(`custom/${line1Safe}/${line2Safe}?${params}`);
+    return `${API_URL}custom/${line1Safe}/${line2Safe}.jpg?${params}`;
   }
 
   static async getAllTemplates() {
