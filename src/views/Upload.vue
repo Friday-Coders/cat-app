@@ -5,21 +5,26 @@
       :drop="true"
       @input="addPhoto"
       extensions="jpg,gif,png,webp"
-      :class="['file-upload', {drag: dropActive}]"
+      :class="['file-upload', { drag: dropActive }]"
       v-if="!catPhoto"
-    >Drop image here ➕</file-upload>
+      >Drop image here ➕</file-upload
+    >
     <router-link
       v-else
       :event="catId ? 'click' : ''"
       :to="{ name: 'Cat Details', params: { catId } }"
     >
-      <div :class="['cat-photo', {uploaded: catId}]">
-        <img :src="catPhoto">
+      <div :class="['cat-photo', { uploaded: catId }]">
+        <img :src="catPhoto" />
       </div>
     </router-link>
     <div class="btns">
-      <button class="btn cool" @click="uploadPhoto" :disabled="disableUpload">Upload</button>
-      <button class="btn danger" @click="removePhoto" :disabled="disableRemove">Remove</button>
+      <button class="btn cool" @click="uploadPhoto" :disabled="disableUpload">
+        Upload
+      </button>
+      <button class="btn danger" @click="removePhoto" :disabled="disableRemove">
+        Remove
+      </button>
     </div>
   </div>
 </template>
@@ -177,4 +182,3 @@ export default {
   width: 100%;
 }
 </style>
-

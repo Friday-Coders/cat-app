@@ -1,8 +1,8 @@
 <template>
   <div id="app" class="wrapper">
-    <top-nav/>
-    <router-view @loading:on="turnOnLoading" @loading:off="turnOffLoading"/>
-    <Loading v-show="isLoading" :isLoading="isLoading"/>
+    <top-nav />
+    <router-view @loading:on="turnOnLoading" @loading:off="turnOffLoading" />
+    <Loading v-show="isLoading" :isLoading="isLoading" />
   </div>
 </template>
 

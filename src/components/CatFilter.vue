@@ -12,14 +12,18 @@
       placeholder="Type"
       :value="filters.mime_types"
       :options="typeOptions"
-      @input="value => this.$emit('update:filterOptions', { mime_types: value })"
+      @input="
+        value => this.$emit('update:filterOptions', { mime_types: value })
+      "
     ></v-select>
     <v-select
       :class="$style.dropdown"
       placeholder="Category"
       :value="filters.category_ids"
       :options="categoryOptions"
-      @input="value => this.$emit('update:filterOptions', { category_ids: value })"
+      @input="
+        value => this.$emit('update:filterOptions', { category_ids: value })
+      "
     ></v-select>
     <v-select
       :class="$style.dropdown"

@@ -1,6 +1,6 @@
 <template>
   <div class="loading flex flex-column items-center justify-center">
-    <img class="cat-loader" src="../assets/cat-loader.svg">
+    <img class="cat-loader" src="../assets/cat-loader.svg" />
     <div class="loading-text">Loading...</div>
     <blockquote class="fact">"{{ fact }}"</blockquote>
   </div>

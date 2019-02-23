@@ -1,7 +1,7 @@
 <template>
   <router-link :to="{ name: 'Cat Details', params: { catId: cat.id } }">
     <div class="card">
-      <img :src="cat.url">
+      <img :src="cat.url" />
     </div>
   </router-link>
 </template>

@@ -1,14 +1,22 @@
 <template>
   <div class="cat-details">
     <div class="cat-container">
-      <canvas ref="canvas" class="canvas" :class="{show: !isAnimated}"></canvas>
-      <img ref="catPhoto" class="cat-photo" :src="image">
+      <canvas
+        ref="canvas"
+        class="canvas"
+        :class="{ show: !isAnimated }"
+      ></canvas>
+      <img ref="catPhoto" class="cat-photo" :src="image" />
     </div>
     <div class="btns">
       <button class="dream btn" @click="deepDream">Deep Dream ✨</button>
-      <button class="cool btn" @click="coolifyCat" :disabled="disableCool">COOL 🕶</button>
+      <button class="cool btn" @click="coolifyCat" :disabled="disableCool">
+        COOL 🕶
+      </button>
       <button class="meme btn" @click="writeOnImage">Memeow? 🐱</button>
-      <button class="danger btn" v-if="this.isMine" @click="deleteCat">Delete ❌</button>
+      <button class="danger btn" v-if="this.isMine" @click="deleteCat">
+        Delete ❌
+      </button>
     </div>
   </div>
 </template>

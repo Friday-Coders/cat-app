@@ -10,5 +10,8 @@ module.exports = {
   },
   parserOptions: {
     parser: "babel-eslint"
+  },
+  globals: {
+    kittydar: "readonly"
   }
 };
