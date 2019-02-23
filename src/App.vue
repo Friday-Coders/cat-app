@@ -40,4 +40,8 @@ export default {
 @import "normalize-scss";
 @import "tachyons";
 @include normalize();
+
+::-webkit-scrollbar {
+  display: none;
+}
 </style>

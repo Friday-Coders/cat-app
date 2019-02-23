@@ -1,10 +1,7 @@
 <template>
   <div class="grid" ref="grid">
-    <Card v-for="cat in cats" :cat="cat" :key="cat.id" />
-    <vue-mugen-scroll
-      :handler="scroll"
-      scroll-container="grid"
-    ></vue-mugen-scroll>
+    <Card v-for="cat in cats" :cat="cat" :key="cat.id"/>
+    <vue-mugen-scroll :handler="scroll" scroll-container="grid"></vue-mugen-scroll>
   </div>
 </template>
 
@@ -36,10 +33,6 @@ export default {
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   grid-auto-rows: 250px;
   grid-gap: 15px;
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
 }
 
 .card {
