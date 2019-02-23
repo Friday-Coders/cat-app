@@ -1,7 +1,7 @@
 import { jsonToQueryString } from "../helpers/index.js";
 
 const API_KEY = "a0243b34-d9c7-42bf-962b-b00d0c766509";
-const API_URL = " https://api.deepai.org/api/";
+const API_URL = "https://api.deepai.org/api/";
 
 export default class DeepAIService {
   static async fetchFromApi(method, endpoint, data) {

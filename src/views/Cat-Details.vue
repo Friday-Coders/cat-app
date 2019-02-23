@@ -1,12 +1,14 @@
 <template>
-  <div>
-    <button @click="deepDream">Deep Dream</button>
-    <button @click="coolifyCat" :disabled="disableCool">COOL 🕶</button>
-    <button v-if="this.isMine" @click="deleteCat">Delete</button>
-    <button @click="writeOnImage">Write On Image</button>
-    <div>
-      <canvas ref="canvas" class="canvas" v-show="showCanvas"></canvas>
-      <img ref="catPhoto" class="cat-photo" v-show="!showCanvas" :src="image">
+  <div class="cat-details">
+    <div class="cat-container">
+      <canvas ref="canvas" class="canvas" :class="{show: !isAnimated}"></canvas>
+      <img ref="catPhoto" class="cat-photo" :src="image">
+    </div>
+    <div class="btns">
+      <button class="dream btn" @click="deepDream">Deep Dream ✨</button>
+      <button class="cool btn" @click="coolifyCat" :disabled="disableCool">COOL 🕶</button>
+      <button class="meme btn" @click="writeOnImage">Memeow? 🐱</button>
+      <button class="danger btn" v-if="this.isMine" @click="deleteCat">Delete ❌</button>
     </div>
   </div>
 </template>
@@ -25,13 +27,15 @@ export default {
       id: this.$route.params.catId,
       image: null,
       isMine: false,
-      showCanvas: false,
+      isAnimated: false,
+      isMemefied: false,
+      isCoolified: false,
       context: null
     };
   },
   computed: {
     disableCool: function() {
-      return !this.showCanvas || !this.image;
+      return this.isAnimated || !this.image;
     }
   },
   watch: {
@@ -53,7 +57,7 @@ export default {
       const returnedCat = await CatApiService.getImage(this.id);
       this.image = returnedCat.url;
       const extension = returnedCat.url.split(".").pop();
-      this.showCanvas = extension !== "gif";
+      this.isAnimated = extension === "gif";
       this.$emit("loading:off");
       console.log("fetched cat data", returnedCat);
     },
@@ -87,6 +91,7 @@ export default {
             vm.context.drawImage(sunGlassesImg, x, y, height, width);
           };
           sunGlassesImg.src = sunglasses;
+          this.isCoolified = true;
         });
       }
     },
@@ -101,8 +106,10 @@ export default {
       this.$emit("loading:on");
       const response = MemeGeneratorService.generateMemeFromImageUrl(
         this.image,
-        "Hello",
-        "Hello World"
+        "meow memeow?",
+        "meowy meow moew",
+        this.$refs.catPhoto.width,
+        this.$refs.catPhoto.height
       );
       this.image = response;
       const img = new Image();
@@ -137,10 +144,42 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../styles/variables.scss";
+
+.cat-details {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.btns {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.cat-container {
+  text-align: center;
+  position: relative;
+}
+
 .cat-photo,
 .canvas {
   max-width: 80vw;
-  max-height: 80vh;
+  max-height: 60vh;
   object-fit: contain;
+  margin: 0 auto;
+  border-radius: 5px;
+}
+
+.canvas {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  visibility: hidden;
+
+  &.show {
+    visibility: visible;
+  }
 }
 </style>
