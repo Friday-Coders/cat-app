@@ -17,7 +17,6 @@
 import CatApiService from "../services/CatApiService.js";
 import DeepAIService from "../services/DeepAIService.js";
 import MemeGeneratorService from "../services/MemeGeneratorService.js";
-import "kittydar/kittydar.js";
 
 import sunglasses from "../assets/sunglasses.png";
 

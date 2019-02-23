@@ -69,8 +69,8 @@ export default class CatApiService {
     return await this.post("images/upload", formData);
   }
 
-  static async getMyImages() {
-    return await this.get("images");
+  static async getMyImages(params) {
+    return await this.get("images", params);
   }
 
   static async deleteImage(id) {
