@@ -35,6 +35,7 @@ export default {
   font-weight: 600;
   transition: all 0.2s ease-out;
   border-bottom: 2px solid transparent;
+  cursor: pointer;
 
   &:hover {
     color: $accentColor;
