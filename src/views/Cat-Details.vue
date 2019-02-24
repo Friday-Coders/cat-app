@@ -2,7 +2,14 @@
   <div class="cat-details">
     <div class="cat-container">
       <canvas ref="canvas" class="canvas" v-show="!isAnimated"></canvas>
-      <img ref="catPhoto" class="cat-photo" @load="drawImageOnCanvas" :src="imageUrl">
+      <img
+        ref="catPhoto"
+        class="cat-photo"
+        crossorigin="Anonymous"
+        @load="drawImageOnCanvas"
+        v-show="isAnimated"
+        :src="corsImageUrl"
+      >
     </div>
     <div class="btns">
       <button class="dream btn" @click="deepDream">Deep Dream ✨</button>
@@ -43,6 +50,9 @@ export default {
   computed: {
     disableCool: function() {
       return this.isAnimated || !this.image;
+    },
+    corsImageUrl: function() {
+      return `https://cors-anywhere.herokuapp.com/${this.imageUrl}`;
     }
   },
   created: function() {
@@ -75,8 +85,7 @@ export default {
       this.$emit("loading:off");
     },
     coolifyCat: function() {
-      this.$refs.catPhoto.crossOrigin = "Anonymous";
-      const catFaces = kittydar.detectCats(this.$refs.catPhoto);
+      const catFaces = kittydar.detectCats(this.$refs.canvas);
       if (!catFaces.length) {
         this.$toasted.show("Sorry, this cat ain't cool enough", {
           position: "bottom-right",
@@ -123,11 +132,16 @@ export default {
       const vm = this;
       vm.$refs.canvas.height = vm.$refs.catPhoto.height;
       vm.$refs.canvas.width = vm.$refs.catPhoto.width;
-      vm.context.clearRect(
+      vm.context.drawImage(
+        this.$refs.catPhoto,
         0,
         0,
-        vm.$refs.catPhoto.width,
-        vm.$refs.catPhoto.height
+        this.$refs.catPhoto.width,
+        this.$refs.catPhoto.height,
+        0,
+        0,
+        vm.$refs.canvas.width,
+        vm.$refs.canvas.height
       );
     },
     loadImgAsBase64: function(url) {
@@ -176,11 +190,5 @@ export default {
   object-fit: contain;
   margin: 0 auto;
   border-radius: 5px;
-}
-
-.canvas {
-  position: absolute;
-  left: 0;
-  top: 0;
 }
 </style>
