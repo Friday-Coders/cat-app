@@ -5,7 +5,7 @@ Vue.use(Router);
 
 export default new Router({
   mode: "history",
-  base: "/cat-app",
+  base: "/",
   routes: [
     {
       path: "/",
