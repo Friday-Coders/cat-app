@@ -11,8 +11,5 @@
         "released"
     ],
     "onlyPublishWithReleaseLabel": true,
-    "author": {
-        "name": "Not A Human",
-        "email": "hazem3500@gmail.com"
-    }
+    "author": "Not A Human <hazem3500@gmail.com>"
 }
