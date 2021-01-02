@@ -21,6 +21,8 @@
     },
     "devDependencies": {
         "@auto-it/all-contributors": "^10.5.0",
+        "@auto-it/conventional-commits": "^10.5.0",
+        "@auto-it/first-time-contributor": "^10.5.0",
         "@vue/cli-plugin-babel": "^3.4.0",
         "@vue/cli-plugin-eslint": "^3.4.0",
         "@vue/cli-plugin-pwa": "^3.4.0",
