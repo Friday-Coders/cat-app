@@ -1,49 +1,70 @@
 {
-  "name": "cat-app",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
-  },
-  "dependencies": {
-    "kittydar": "^1.0.0",
-    "normalize-scss": "^7.0.1",
-    "register-service-worker": "^1.5.2",
-    "vue": "^2.5.22",
-    "vue-mugen-scroll": "^0.2.5",
-    "vue-router": "^3.0.1",
-    "vue-select": "^2.5.1",
-    "vue-toasted": "^1.1.26",
-    "vue-upload-component": "^2.8.19"
-  },
-  "devDependencies": {
-    "@vue/cli-plugin-babel": "^3.4.0",
-    "@vue/cli-plugin-eslint": "^3.4.0",
-    "@vue/cli-plugin-pwa": "^3.4.0",
-    "@vue/cli-service": "^3.4.0",
-    "@vue/eslint-config-prettier": "^4.0.1",
-    "babel-eslint": "^10.0.1",
-    "eslint": "^5.8.0",
-    "eslint-plugin-vue": "^5.0.0",
-    "lint-staged": "^8.1.0",
-    "node-sass": "^4.13.1",
-    "sass-loader": "^7.1.0",
-    "tachyons": "^4.10.0",
-    "vue-template-compiler": "^2.5.21"
-  },
-  "gitHooks": {
-    "pre-commit": "lint-staged"
-  },
-  "lint-staged": {
-    "*.js": [
-      "vue-cli-service lint",
-      "git add"
-    ],
-    "*.vue": [
-      "vue-cli-service lint",
-      "git add"
-    ]
-  }
+    "name": "cat-app",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "serve": "vue-cli-service serve",
+        "build": "vue-cli-service build",
+        "lint": "vue-cli-service lint",
+        "release": "auto shipit"
+    },
+    "dependencies": {
+        "kittydar": "^1.0.0",
+        "normalize-scss": "^7.0.1",
+        "register-service-worker": "^1.5.2",
+        "vue": "^2.5.22",
+        "vue-mugen-scroll": "^0.2.5",
+        "vue-router": "^3.0.1",
+        "vue-select": "^2.5.1",
+        "vue-toasted": "^1.1.26",
+        "vue-upload-component": "^2.8.19"
+    },
+    "devDependencies": {
+        "@auto-it/all-contributors": "^10.5.0",
+        "@vue/cli-plugin-babel": "^3.4.0",
+        "@vue/cli-plugin-eslint": "^3.4.0",
+        "@vue/cli-plugin-pwa": "^3.4.0",
+        "@vue/cli-service": "^3.4.0",
+        "@vue/eslint-config-prettier": "^4.0.1",
+        "auto": "^10.5.0",
+        "babel-eslint": "^10.0.1",
+        "eslint": "^5.8.0",
+        "eslint-plugin-vue": "^5.0.0",
+        "lint-staged": "^8.1.0",
+        "node-sass": "^4.13.1",
+        "sass-loader": "^7.1.0",
+        "tachyons": "^4.10.0",
+        "vue-template-compiler": "^2.5.21"
+    },
+    "gitHooks": {
+        "pre-commit": "lint-staged"
+    },
+    "lint-staged": {
+        "*.js": [
+            "vue-cli-service lint",
+            "git add"
+        ],
+        "*.vue": [
+            "vue-cli-service lint",
+            "git add"
+        ]
+    },
+    "repository": "friday-coders/cat-app",
+    "author": "NotAHuman <hazem3500@gmail.com>",
+    "auto": {
+        "plugins": [
+            [
+                "all-contributors",
+                {
+                    "exclude": [
+                        "dependabot"
+                    ]
+                }
+            ],
+            "conventional-commits",
+            "first-time-contributor",
+            "released"
+        ],
+        "onlyPublishWithReleaseLabel": true
+    }
 }
