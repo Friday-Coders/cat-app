@@ -1,0 +1,18 @@
+{
+    "plugins": [
+        [
+            "all-contributors",
+            {
+                "exclude": ["dependabot"]
+            }
+        ],
+        "conventional-commits",
+        "first-time-contributor",
+        "released"
+    ],
+    "onlyPublishWithReleaseLabel": true,
+    "author": {
+        "name": "Not A Human",
+        "email": "hazem3500@gmail.com"
+    }
+}

@@ -51,22 +51,5 @@
             "git add"
         ]
     },
-    "repository": "friday-coders/cat-app",
-    "author": "hazem3500 <hazem3500@gmail.com>",
-    "auto": {
-        "plugins": [
-            [
-                "all-contributors",
-                {
-                    "exclude": [
-                        "dependabot"
-                    ]
-                }
-            ],
-            "conventional-commits",
-            "first-time-contributor",
-            "released"
-        ],
-        "onlyPublishWithReleaseLabel": true
-    }
+    "repository": "friday-coders/cat-app"
 }
